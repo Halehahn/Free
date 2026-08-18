@@ -3,94 +3,33 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Comparateur simple des tarifs internationaux Free : data, appels et lignes fixes par pays et forfait.">
-<title>Free International — Tarifs pays par pays</title>
+<title>Free — Tarifs pays par pays</title>
 <link rel="stylesheet" href="/assets/app.v515.css">
 </head>
 <body><main>
-<div class="logo"><span style="color:#e30613">Free</span></div>
+<div class="logo"><span>Free</span></div>
 <h1>Quel est le tarif ?</h1>
 <p class="lead">Recherchez un pays, choisissez la ligne, et voyez immédiatement ce qui est inclus ou payant.</p>
-
 <div class="search">
- <div class="field autocompleteField">
-   <label>Depuis quel pays ?</label>
-   <input id="countrySearch" type="search" placeholder="Commencez à taper un pays…" autocomplete="off">
-   <input id="country" type="hidden" value="Allemagne">
-   <div id="suggestions" class="suggestions" role="listbox"></div>
- </div>
- <div class="field"><label>Avec quelle ligne ?</label><select id="plan">
-   <option value="free">Forfait Free 5G+</option><option value="max">Forfait Free Max</option><option value="serie">Série Free</option><option value="two">Forfait 2 €</option>
-   <option value="fixed">Ligne fixe Freebox</option><option value="fixed_special">Ligne fixe — Série Spéciale Pop S</option>
- </select></div>
+ <div class="field autocompleteField"><label>Depuis quel pays ?</label><input id="countrySearch" type="search" placeholder="Commencez à taper un pays…" autocomplete="off"><input id="country" type="hidden" value="Allemagne"><div id="suggestions" class="suggestions" role="listbox"></div></div>
+ <div class="field"><label>Avec quelle ligne ?</label><select id="plan"><option value="free">Forfait Free 5G+</option><option value="max">Forfait Free Max</option><option value="serie">Série Free</option><option value="two">Forfait 2 €</option><option value="fixed">Ligne fixe Freebox</option><option value="fixed_special">Ligne fixe — Série Spéciale Pop S</option></select></div>
 </div>
 <div class="context" id="context"></div>
-<div class="actions">
- <button class="actionBtn primary" id="copyBtn" type="button">Copier les infos</button>
- <button class="actionBtn" id="compareBtn" type="button">Comparer les forfaits</button>
-</div>
-
-<section class="compare hidden" id="compareBlock">
- <h2>Comparaison pour <span id="compareCountry"></span><span class="compareReason">Le meilleur choix est estimé selon la data et les appels inclus dans ce pays.</span></h2>
- <div class="compareGrid" id="compareGrid"></div>
-</section>
-
+<div class="actions"><button class="actionBtn primary" id="copyBtn" type="button">Copier les infos</button><button class="actionBtn" id="compareBtn" type="button">Comparer les forfaits</button></div>
+<section class="compare hidden" id="compareBlock"><h2>Comparaison pour <span id="compareCountry"></span><span class="compareReason">Le meilleur choix est estimé selon la data et les appels inclus dans ce pays.</span></h2><div class="compareGrid" id="compareGrid"></div></section>
 <section id="mobileBlock">
- <div class="cards">
-  <article class="card"><h2>📶 Data dans le pays</h2><div class="big" id="dataBig">—</div><div class="desc" id="dataDesc"></div><span class="badge neutral" id="dataBadge"></span></article>
-  <article class="card"><h2>📞 Appels depuis le pays</h2><div class="big" id="callsBig">—</div><div class="desc" id="callsDesc"></div><span class="badge neutral" id="callsBadge"></span></article>
- </div>
- <section class="roamingDetails">
-  <div class="detailsHead">
-   <div>
-    <h2>Détails des appels depuis le pays</h2>
-    <div class="roamingIntro">Tarif appliqué lorsque vous utilisez votre ligne dans le pays sélectionné.</div>
-   </div>
-   <span class="small" id="roamZone"></span>
-  </div>
-  <div class="roamingGrid">
-   <div class="roamingItem">
-    <div class="roamingText"><span class="roamingLabel">📞 Appeler la France</span><span class="roamingHint">Vers un fixe ou mobile français</span></div>
-    <span class="roamingValue" id="toFrance"></span>
-   </div>
-   <div class="roamingItem">
-    <div class="roamingText"><span class="roamingLabel">📍 Appeler dans le pays</span><span class="roamingHint">Vers un numéro local du pays visité</span></div>
-    <span class="roamingValue" id="local"></span>
-   </div>
-   <div class="roamingItem">
-    <div class="roamingText"><span class="roamingLabel">⭐ Appeler Europe / DOM</span><span class="roamingHint">Vers une destination européenne ou DOM</span></div>
-    <span class="roamingValue" id="toEurope"></span>
-   </div>
-   <div class="roamingItem">
-    <div class="roamingText"><span class="roamingLabel">🌍 Appeler le reste du monde</span><span class="roamingHint">Vers une autre destination internationale</span></div>
-    <span class="roamingValue" id="toWorld"></span>
-   </div>
-   <div class="roamingItem">
-    <div class="roamingText"><span class="roamingLabel">📲 Recevoir un appel</span><span class="roamingHint">Quand quelqu’un vous appelle pendant votre séjour</span></div>
-    <span class="roamingValue" id="received"></span>
-   </div>
-  </div>
- </section>
- <section class="details"><div class="detailsHead"><h2>Depuis la France → <span id="frDest"></span></h2><span class="small">appel mobile</span></div>
-  <div class="row"><span class="label">Vers un fixe</span><span class="value" id="fromFrFixed"></span></div>
-  <div class="row"><span class="label">Vers un mobile</span><span class="value" id="fromFrMobile"></span></div>
- </section>
- <section class="details"><div class="detailsHead"><h2>SMS / MMS depuis le pays</h2><span class="small">hors numéros surtaxés</span></div>
-  <div class="row"><span class="label">SMS envoyé</span><span class="value" id="sms"></span></div>
-  <div class="row"><span class="label">MMS envoyé</span><span class="value" id="mmsOut"></span></div>
-  <div class="row"><span class="label">MMS reçu</span><span class="value" id="mmsIn"></span></div>
- </section>
+ <div class="cards"><article class="card"><h2>📶 Data dans le pays</h2><div class="big" id="dataBig">—</div><div class="desc" id="dataDesc"></div><span class="badge neutral" id="dataBadge"></span></article><article class="card"><h2>📞 Appels depuis le pays</h2><div class="big" id="callsBig">—</div><div class="desc" id="callsDesc"></div><span class="badge neutral" id="callsBadge"></span></article></div>
+ <section class="roamingDetails"><div class="detailsHead"><div><h2>Détails des appels depuis le pays</h2><div class="roamingIntro">Tarif appliqué lorsque vous utilisez votre ligne dans le pays sélectionné.</div></div><span class="small" id="roamZone"></span></div><div class="roamingGrid">
+  <div class="roamingItem"><div class="roamingText"><span class="roamingLabel">📞 Appeler la France</span><span class="roamingHint">Vers un fixe ou mobile français</span></div><span class="roamingValue" id="toFrance"></span></div>
+  <div class="roamingItem"><div class="roamingText"><span class="roamingLabel">📍 Appeler dans le pays</span><span class="roamingHint">Vers un numéro local du pays visité</span></div><span class="roamingValue" id="local"></span></div>
+  <div class="roamingItem"><div class="roamingText"><span class="roamingLabel">⭐ Appeler Europe / DOM</span><span class="roamingHint">Vers une destination européenne ou DOM</span></div><span class="roamingValue" id="toEurope"></span></div>
+  <div class="roamingItem"><div class="roamingText"><span class="roamingLabel">🌍 Appeler le reste du monde</span><span class="roamingHint">Vers une autre destination internationale</span></div><span class="roamingValue" id="toWorld"></span></div>
+  <div class="roamingItem"><div class="roamingText"><span class="roamingLabel">📲 Recevoir un appel</span><span class="roamingHint">Quand quelqu’un vous appelle pendant votre séjour</span></div><span class="roamingValue" id="received"></span></div>
+ </div></section>
+ <section class="details"><div class="detailsHead"><h2>Depuis la France → <span id="frDest"></span></h2><span class="small">appel mobile</span></div><div class="row"><span class="label">Vers un fixe</span><span class="value" id="fromFrFixed"></span></div><div class="row"><span class="label">Vers un mobile</span><span class="value" id="fromFrMobile"></span></div></section>
+ <section class="details"><div class="detailsHead"><h2>SMS / MMS depuis le pays</h2><span class="small">hors numéros surtaxés</span></div><div class="row"><span class="label">SMS envoyé</span><span class="value" id="sms"></span></div><div class="row"><span class="label">MMS envoyé</span><span class="value" id="mmsOut"></span></div><div class="row"><span class="label">MMS reçu</span><span class="value" id="mmsIn"></span></div></section>
 </section>
-
-<section id="fixedBlock" class="hidden">
- <div class="cards">
-  <article class="card"><h2>☎️ France → fixe du pays</h2><div class="big" id="fbFixed">—</div><div class="setupFeeAlert" id="fbFixedSetupAlert"></div><div class="desc">Depuis un téléphone raccordé à la Freebox.</div></article>
-  <article class="card"><h2>📱 France → mobile du pays</h2><div class="big" id="fbMobile">—</div><div class="setupFeeAlert" id="fbMobileSetupAlert"></div><div class="desc" id="fbMobileDesc"></div></article>
- </div>
-
-</section>
-
-<div class="notice" id="notice"></div>
-<div class="copyToast" id="copyToast">Informations copiées</div>
+<section id="fixedBlock" class="hidden"><div class="cards"><article class="card"><h2>☎️ France → fixe du pays</h2><div class="big" id="fbFixed">—</div><div class="setupFeeAlert" id="fbFixedSetupAlert"></div><div class="desc">Depuis un téléphone raccordé à la Freebox.</div></article><article class="card"><h2>📱 France → mobile du pays</h2><div class="big" id="fbMobile">—</div><div class="setupFeeAlert" id="fbMobileSetupAlert"></div><div class="desc" id="fbMobileDesc"></div></article></div></section>
+<div class="notice" id="notice"></div><div class="copyToast" id="copyToast">Informations copiées</div>
 <div class="sources">Sources officielles : <a href="https://mobile.free.fr/docs/bt/tarifs.pdf" target="_blank">Brochure Free Mobile — 21/07/2026</a> · <a href="https://mobile.free.fr/docs/fis/Fiche_information_standardisee_Serie_Free.pdf" target="_blank">Tarifs Série Free — 09/07/2026</a> · <a href="https://adsl.free.fr/cgv/brochure_tarifaire_20251217.pdf" target="_blank">Brochure Freebox — tarifs en vigueur depuis le 14/01/2026</a>.</div>
-</main>
-<script src="/assets/app.v515.js" defer></script></body></html>
+</main><script src="/assets/app.v515.packed.js" defer></script></body></html>
